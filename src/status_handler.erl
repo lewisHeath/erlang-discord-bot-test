@@ -2,7 +2,8 @@
 
 -export([update_status/1]).
 
--include("../include/macros.hrl").
+-include("discord_api_types.hrl").
+-include("macros.hrl").
 
 update_status(#status{since = Since, activities = Activities, status = Status, afk = Afk}) ->
     Payload = #{
@@ -14,5 +15,5 @@ update_status(#status{since = Since, activities = Activities, status = Status, a
             <<"afk">> => Afk
         }
     },
-    io:format("Generated status update payload: ~p~n", [Payload]),
-    gen_server:cast(discord_api_gen_server, {send, Payload}).
+    ?DEBUG("Generated status update payload: ~p~n", [Payload]),
+    rate_limiter:send(Payload).

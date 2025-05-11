@@ -1,10 +1,11 @@
 PROJECT = discord_api
-PROJECT_DESCRIPTION = New project
+PROJECT_DESCRIPTION = A discord api written in Erlang
 PROJECT_VERSION = 0.1.0
 
-DEPS = gun certifi jsx lager
+DEPS = gun certifi lager
 
 dep_certifi = hex 2.13.0
+dep_lager = git https://github.com/erlang-lager/lager.git
 
 SHELL_OPTS += -args_file config/vm.args -config config/sys.config -eval 'application:ensure_all_started(discord_api)'
 
